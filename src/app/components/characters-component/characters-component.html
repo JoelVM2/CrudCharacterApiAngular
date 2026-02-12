@@ -1,0 +1,25 @@
+<h1 class="title">Characters</h1>
+
+<div class="character-list">
+  @for (character of characterService.characters; track $index) {
+    <div class="character-item">
+      <a [routerLink]="['/characters/', character.id]" class="character-link">
+        <div class="character-card">
+          <img
+            [src]="character.image"
+            alt="Character avatar"
+          />
+          <span class="character-name">{{ character.name }} {{ character.species }}</span>
+        </div>
+      </a>
+      <div class="character-actions">
+        <button class="btn btn-edit" title="Modificar personaje">
+          <span class="btn-icon">✏️</span>
+        </button>
+        <button class="btn btn-delete" title="Borrar personaje">
+          <span class="btn-icon">🗑️</span>
+        </button>
+      </div>
+    </div>
+  }
+</div>

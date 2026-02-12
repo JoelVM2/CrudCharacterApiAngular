@@ -1,0 +1,205 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Resta la altura del header */
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+  animation: fadeIn 1s ease-out;
+}
+
+.home h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-shadow: 
+    4px 4px 0 #000,
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    0 0 20px #45f0ff,
+    0 0 40px #45f0ff;
+  max-width: 800px;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  animation: slideUp 1s ease-out;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #45f0ff, #0cbaba);
+  border: 2px solid #fff;
+  border-radius: 50px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  box-shadow: 
+    0 0 0 4px #000,
+    0 8px 0 #000,
+    0 10px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  position: relative;
+  animation: bounceIn 1s ease-out 0.3s both;
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 0 0 4px #000,
+    0 13px 0 #000,
+    0 15px 30px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #7fffd4, #45f0ff);
+  border-color: #ffd700;
+  color: #000;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.btn:active {
+  transform: translateY(8px);
+  box-shadow: 
+    0 0 0 4px #000,
+    0 5px 0 #000,
+    0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Efecto de portal para el fondo */
+.home::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(69, 240, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulsePortal 4s ease-in-out infinite;
+}
+
+/* Efecto de brillo para el botón */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+  pointer-events: none;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulsePortal {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -60%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Media queries para responsive */
+@media (max-width: 768px) {
+  .home h1 {
+    font-size: 2rem;
+    text-shadow: 
+      3px 3px 0 #000,
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      0 0 15px #45f0ff;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  .home::before {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .home::before {
+    width: 300px;
+    height: 300px;
+  }
+}

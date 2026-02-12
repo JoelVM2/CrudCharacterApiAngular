@@ -1,0 +1,33 @@
+<h1 class="title">Characters</h1>
+
+<div class="character-list">
+  @if (selectedCharacter) {
+    <div class="character-card">
+      <span class="character-id">{{ selectedCharacter.id }}</span>
+      
+      <img
+        [src]="selectedCharacter.image"
+        alt="Character avatar"
+      />
+      
+      <span class="character-name">{{ selectedCharacter.name }}</span>
+      
+      <div class="character-details">
+        <span class="badge badge-species">{{ selectedCharacter.species }}</span>
+        <span class="badge badge-status">{{ selectedCharacter.status }}</span>
+        <span class="badge badge-gender">{{ selectedCharacter.gender }}</span>
+      </div>
+
+      <div class="character-actions">
+        <button class="btn btn-edit">
+          <span class="btn-icon">✏️</span>
+          Modificar
+        </button>
+        <button class="btn btn-delete">
+          <span class="btn-icon">🗑️</span>
+          Borrar
+        </button>
+      </div>
+    </div>
+  }
+</div>
