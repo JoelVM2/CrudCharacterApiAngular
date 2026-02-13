@@ -1,10 +1,10 @@
-# 📌 CRUD Characters API - Angular
+#  CRUD Characters API - Angular
 
 Aplicación web desarrollada en **Angular** que permite realizar operaciones CRUD (Create, Read, Update, Delete) sobre personajes consumiendo una API REST.
 
 ---
 
-## 🚀 Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 - Angular
 - TypeScript
@@ -16,7 +16,7 @@ Aplicación web desarrollada en **Angular** que permite realizar operaciones CRU
 
 ---
 
-## 📂 Estructura del proyecto
+##  Estructura del proyecto
 
 src/
 ├── app/
@@ -50,25 +50,25 @@ src/
 
 ---
 
-## 🔄 Operaciones CRUD
+##  Operaciones CRUD
 El proyecto consume una API REST mediante `HttpClient`.
 
-### 📥 Obtener todos los personajes
+###  Obtener todos los personajes
 GET /characters
 
-### 📄 Obtener personaje por ID
+###  Obtener personaje por ID
 GET /characters/{id}
 
-### ➕ Crear personaje
+###  Crear personaje
 POST /characters
 
-### ✏️ Actualizar personaje
+###  Actualizar personaje
 PUT /characters/{id}
 
-### ❌ Eliminar personaje
+###  Eliminar personaje
 DELETE /characters/{id}
 
-## 🛠 Instalación y ejecución
+##  Instalación y ejecución
 
 ### 1️⃣ Clonar el repositorio
 ```bash
