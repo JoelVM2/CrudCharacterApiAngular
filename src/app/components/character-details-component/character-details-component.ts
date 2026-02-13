@@ -11,6 +11,11 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './character-details-component.html',
   styleUrl: './character-details-component.css',
 })
+
+/**
+ * Componente que muestra el detalle de un personaje.
+ * Permite editar y eliminar el personaje seleccionado.
+ */
 export class CharacterDetailsComponent {
   userId!: number;
   selectedCharacter: any;
@@ -24,6 +29,11 @@ export class CharacterDetailsComponent {
     private cdr: ChangeDetectorRef
   ) {}
 
+ /**
+   * Inicializa el componente.
+   * Obtiene el ID desde la ruta y carga el personaje correspondiente.
+   * @returns void
+   */
   ngOnInit(): void {
     this.subscription = this.activatedRoute.paramMap.subscribe(params => {
       this.userId = Number(params.get('id'));
@@ -31,6 +41,11 @@ export class CharacterDetailsComponent {
     });
   }
 
+   /**
+   * Obtiene un personaje por su ID.
+   * @param {number} id - ID del personaje a buscar.
+   * @returns void
+   */
   getUser(id: number) {
     this.characterService.getCharacterById(id).subscribe({
       next: (response: any) => {
@@ -46,11 +61,15 @@ export class CharacterDetailsComponent {
   openDeleteModal() {
   this.isDeleteModalOpen = true;
   }
-
+  
   closeDeleteModal() {
     this.isDeleteModalOpen = false;
   }
 
+  /**
+   * Elimina el personaje seleccionado.
+   * @returns void
+   */
   confirmDelete() {
     this.characterService.deleteCharacter(this.selectedCharacter.id)
       .subscribe(() => {
@@ -58,12 +77,15 @@ export class CharacterDetailsComponent {
       });
   }
 
-
-
+  /**
+   * Se ejecuta al destruir el componente.
+   * Libera la suscripción activa.
+   * @returns void
+   */
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
-
+  
   openEditModal() {
   this.selectedCharacter = { ...this.selectedCharacter };
   this.isModalOpen = true;
@@ -73,6 +95,10 @@ export class CharacterDetailsComponent {
     this.isModalOpen = false;
   }
 
+  /**
+   * Actualiza el personaje en el backend.
+   * @returns void
+   */
   updateCharacter() {
     this.characterService.putCharacter(
       this.selectedCharacter.id,

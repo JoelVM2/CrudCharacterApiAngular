@@ -9,22 +9,27 @@ import { Router } from '@angular/router';
   templateUrl: './characters-form-component.html',
   styleUrl: './characters-form-component.css',
 })
+
+/**
+ * Componente que gestiona el formulario de creación de personajes.
+ */
 export class CharactersFormComponent {
 characterForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private characterService: CharacterService,
-    private router: Router
-  ) {
+  constructor(private fb: FormBuilder,private characterService: CharacterService,private router: Router  ) {
     this.characterForm = this.fb.group({
       name: ['', Validators.required],
       status: ['', Validators.required],
+      gender: ['', Validators.required],
       species: ['', Validators.required],
       image: ['', Validators.required]
     });
   }
 
+  /**
+   * Envía el formulario y crea un nuevo personaje si es válido.
+   * @returns void
+   */
   onSubmit() {
     if (this.characterForm.valid) {
       this.characterService.postCharacter(this.characterForm.value)
