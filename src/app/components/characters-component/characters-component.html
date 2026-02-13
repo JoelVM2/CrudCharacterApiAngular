@@ -13,13 +13,62 @@
         </div>
       </a>
       <div class="character-actions">
-        <button class="btn btn-edit" title="Modificar personaje">
+        <button class="btn btn-edit" title="Modificar personaje" (click)="openEditModal(character)">
           <span class="btn-icon">✏️</span>
         </button>
-        <button class="btn btn-delete" title="Borrar personaje">
+        <button class="btn btn-delete" title="Borrar personaje" (click)="openDeleteModal()">
           <span class="btn-icon">🗑️</span>
         </button>
       </div>
     </div>
   }
 </div>
+@if (isModalOpen) {
+  <div class="modal-backdrop">
+    <div class="modal">
+
+      <h2>Editar personaje</h2>
+
+      <input [(ngModel)]="selectedCharacter.name" placeholder="Name">
+      <input [(ngModel)]="selectedCharacter.status" placeholder="Status">
+      <input [(ngModel)]="selectedCharacter.gender" placeholder="Gender">
+      <input [(ngModel)]="selectedCharacter.species" placeholder="Species">
+      <input [(ngModel)]="selectedCharacter.image" placeholder="Image URL">
+
+      <div class="modal-buttons">
+        <button class="btn btn-edit" (click)="updateCharacter()">
+          Guardar
+        </button>
+
+        <button class="btn btn-delete" (click)="closeModal()">
+          Cancelar
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
+@if (isDeleteModalOpen) {
+  <div class="modal-backdrop">
+    <div class="modal">
+
+      <h2>Confirmar eliminación</h2>
+
+      <p>
+        ¿Seguro que quieres borrar a 
+        <strong>{{ selectedCharacter.name }}</strong>?
+      </p>
+
+      <div class="modal-buttons">
+        <button class="btn btn-delete" (click)="confirmDelete()">
+          Sí, borrar
+        </button>
+
+        <button class="btn btn-edit" (click)="closeDeleteModal()">
+          Cancelar
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

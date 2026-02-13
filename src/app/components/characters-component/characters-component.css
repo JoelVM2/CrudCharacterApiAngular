@@ -396,3 +396,653 @@
   outline: 3px solid #ffd700;
   outline-offset: 3px;
 }
+
+/* Backdrop del modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal principal */
+.modal {
+  background: rgba(10, 20, 30, 0.95);
+  backdrop-filter: blur(15px);
+  border: 4px solid #45f0ff;
+  border-radius: 40px;
+  padding: 2.5rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 
+    0 25px 0 #0a8a8a,
+    0 0 0 5px #000,
+    0 40px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 50px rgba(69, 240, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: modalEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efecto de portal interdimensional */
+.modal::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(69, 240, 255, 0.15) 0%, transparent 70%);
+  animation: rotatePortal 15s linear infinite;
+  z-index: 0;
+}
+
+/* Título del modal */
+.modal h2 {
+  font-size: 2.2rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 
+    4px 4px 0 #000,
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    0 0 25px #45f0ff,
+    0 0 50px #45f0ff;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  font-weight: 900;
+}
+
+/* Inputs del modal */
+.modal input {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 3px solid #45f0ff;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 5px 0 #0a8a8a,
+    0 0 0 2px #000,
+    inset 0 0 15px rgba(69, 240, 255, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+/* Placeholder de los inputs */
+.modal input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+/* Input en foco */
+.modal input:focus {
+  border-color: #7fffd4;
+  box-shadow: 
+    0 8px 0 #0a8a8a,
+    0 0 0 3px #000,
+    0 0 30px #45f0ff,
+    inset 0 0 25px rgba(69, 240, 255, 0.4);
+  transform: translateY(-3px);
+  background: rgba(30, 40, 50, 0.8);
+}
+
+/* Contenedor de botones del modal */
+.modal-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilo base para botones del modal */
+.modal .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 3px solid #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 0 rgba(0, 0, 0, 0.5),
+    0 10px 20px rgba(0, 0, 0, 0.4);
+  flex: 1;
+  max-width: 200px;
+}
+
+/* Botón Guardar (reutiliza estilo de edit) */
+.modal .btn-edit {
+  background: linear-gradient(135deg, #45f0ff, #0cbaba);
+  color: #000;
+  border-color: #fff;
+}
+
+/* Botón Cancelar (reutiliza estilo de delete) */
+.modal .btn-delete {
+  background: linear-gradient(135deg, #ff6b6b, #c92a2a);
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Efecto de brillo en botones */
+.modal .btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.modal .btn:hover::before {
+  left: 100%;
+}
+
+/* Hover de botones */
+.modal .btn:hover {
+  transform: translateY(-5px);
+}
+
+.modal .btn-edit:hover {
+  background: linear-gradient(135deg, #7fffd4, #45f0ff);
+  border-color: #ffd700;
+  box-shadow: 
+    0 12px 0 #0a8a8a,
+    0 15px 30px rgba(69, 240, 255, 0.5);
+}
+
+.modal .btn-delete:hover {
+  background: linear-gradient(135deg, #ff8787, #e03131);
+  border-color: #ffd700;
+  box-shadow: 
+    0 12px 0 #8a2a2a,
+    0 15px 30px rgba(255, 107, 107, 0.5);
+}
+
+/* Active de botones */
+.modal .btn:active {
+  transform: translateY(3px);
+  box-shadow: 
+    0 4px 0 rgba(0, 0, 0, 0.5),
+    0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes rotatePortal {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal {
+    padding: 2rem;
+  }
+
+  .modal h2 {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+  }
+
+  .modal input {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .modal .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .modal h2 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal input {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal .btn {
+    max-width: 100%;
+    padding: 0.8rem;
+  }
+}
+
+.modal .btn:focus-visible,
+.modal input:focus-visible {
+  outline: 3px solid #ffd700;
+  outline-offset: 3px;
+}
+
+.modal .btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+}
+
+.modal .btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  right: 10px;
+}
+/* Backdrop del modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal principal */
+.modal {
+  background: rgba(20, 10, 20, 0.98);
+  backdrop-filter: blur(15px);
+  border: 4px solid #ff6b6b;
+  border-radius: 40px;
+  padding: 2.5rem;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 
+    0 25px 0 #8a2a2a,
+    0 0 0 5px #000,
+    0 40px 60px rgba(0, 0, 0, 0.9),
+    inset 0 0 50px rgba(255, 107, 107, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: modalEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: center;
+}
+
+/* Efecto de portal interdimensional rojo */
+.modal::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+  animation: rotatePortal 15s linear infinite;
+  z-index: 0;
+}
+
+/* Título del modal */
+.modal h2 {
+  font-size: 2.2rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 
+    4px 4px 0 #000,
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    0 0 25px #ff6b6b,
+    0 0 50px #ff6b6b;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  font-weight: 900;
+}
+
+/* Texto del modal */
+.modal p {
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 0 #000;
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+}
+
+/* Nombre del personaje destacado */
+.modal strong {
+  color: #ff6b6b;
+  font-size: 1.5rem;
+  text-shadow: 
+    2px 2px 0 #000,
+    0 0 20px #ff6b6b,
+    0 0 40px #ff0000;
+  display: inline-block;
+  animation: pulseName 1.5s infinite;
+}
+
+/* Contenedor de botones del modal */
+.modal-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Estilo base para botones del modal */
+.modal .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 3px solid #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 0 rgba(0, 0, 0, 0.5),
+    0 10px 20px rgba(0, 0, 0, 0.4);
+  flex: 1;
+  max-width: 180px;
+}
+
+/* Botón de borrar (rojo) - para confirmar */
+.modal .btn-delete {
+  background: linear-gradient(135deg, #ff6b6b, #c92a2a);
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Botón de cancelar (azul) */
+.modal .btn-edit {
+  background: linear-gradient(135deg, #45f0ff, #0cbaba);
+  color: #000;
+  border-color: #fff;
+}
+
+/* Efecto de brillo en botones */
+.modal .btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.modal .btn:hover::before {
+  left: 100%;
+}
+
+/* Hover de botones */
+.modal .btn:hover {
+  transform: translateY(-5px);
+}
+
+.modal .btn-delete:hover {
+  background: linear-gradient(135deg, #ff8787, #e03131);
+  border-color: #ffd700;
+  box-shadow: 
+    0 12px 0 #8a2a2a,
+    0 15px 30px rgba(255, 107, 107, 0.6);
+}
+
+.modal .btn-edit:hover {
+  background: linear-gradient(135deg, #7fffd4, #45f0ff);
+  border-color: #ffd700;
+  box-shadow: 
+    0 12px 0 #0a8a8a,
+    0 15px 30px rgba(69, 240, 255, 0.5);
+}
+
+/* Active de botones */
+.modal .btn:active {
+  transform: translateY(3px);
+  box-shadow: 
+    0 4px 0 rgba(0, 0, 0, 0.5),
+    0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Efecto de advertencia en el modal */
+.modal::after {
+  content: '⚠️';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  opacity: 0.3;
+  animation: warningPulse 2s infinite;
+  z-index: 1;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes rotatePortal {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes pulseName {
+  0%, 100% {
+    text-shadow: 2px 2px 0 #000, 0 0 20px #ff6b6b, 0 0 40px #ff0000;
+  }
+  50% {
+    text-shadow: 2px 2px 0 #000, 0 0 40px #ff6b6b, 0 0 80px #ff0000;
+  }
+}
+
+@keyframes warningPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal {
+    padding: 2rem;
+  }
+
+  .modal h2 {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+  }
+
+  .modal p {
+    font-size: 1.1rem;
+  }
+
+  .modal strong {
+    font-size: 1.3rem;
+  }
+
+  .modal .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .modal h2 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .modal p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal strong {
+    font-size: 1.2rem;
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal .btn {
+    max-width: 100%;
+    padding: 0.8rem;
+  }
+
+  .modal::after {
+    font-size: 1.5rem;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Estilo para el foco de accesibilidad */
+.modal .btn:focus-visible {
+  outline: 3px solid #ffd700;
+  outline-offset: 3px;
+}
+
+/* Efecto de carga mientras se elimina */
+.modal .btn-delete.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+}
+
+.modal .btn-delete.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  right: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
