@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CharacterService } from '../../services/character-service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {  FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-character-details-component',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './character-details-component.html',
   styleUrl: './character-details-component.css',
 })
@@ -20,14 +20,13 @@ export class CharacterDetailsComponent {
   userId!: number;
   selectedCharacter: any;
   private subscription?: Subscription;
+
   isModalOpen = false;
   isDeleteModalOpen = false;
 
-  constructor(
-    public characterService: CharacterService,
-    private activatedRoute: ActivatedRoute,
-    private cdr: ChangeDetectorRef
-  ) {}
+  editForm!: FormGroup;
+
+  constructor(public characterService: CharacterService, private activatedRoute: ActivatedRoute, private cdr: ChangeDetectorRef,private fb: FormBuilder) {}
 
  /**
    * Inicializa el componente.
@@ -38,6 +37,15 @@ export class CharacterDetailsComponent {
     this.subscription = this.activatedRoute.paramMap.subscribe(params => {
       this.userId = Number(params.get('id'));
       this.getUser(this.userId);
+
+      this.editForm = this.fb.group({
+      name: ['', Validators.required],
+      species: ['', Validators.required],
+      status: ['', Validators.required],
+      gender: ['', Validators.required],
+      image: ['', Validators.required]
+});
+
     });
   }
 
@@ -87,9 +95,17 @@ export class CharacterDetailsComponent {
   }
   
   openEditModal() {
-  this.selectedCharacter = { ...this.selectedCharacter };
+  this.editForm.patchValue({
+    name: this.selectedCharacter.name,
+    species: this.selectedCharacter.species,
+    status: this.selectedCharacter.status,
+    gender: this.selectedCharacter.gender,
+    image: this.selectedCharacter.image
+  });
+
   this.isModalOpen = true;
-  }
+}
+
 
   closeModal() {
     this.isModalOpen = false;
@@ -100,14 +116,26 @@ export class CharacterDetailsComponent {
    * @returns void
    */
   updateCharacter() {
+  if (this.editForm.valid) {
+
+    const updatedCharacter = {
+      ...this.selectedCharacter,
+      ...this.editForm.value
+    };
+
     this.characterService.putCharacter(
       this.selectedCharacter.id,
-      this.selectedCharacter
+      updatedCharacter
     ).subscribe(() => {
+
+      this.selectedCharacter = updatedCharacter;
+
       this.isModalOpen = false;
       this.cdr.detectChanges();
     });
   }
+}
+
 
 
 }

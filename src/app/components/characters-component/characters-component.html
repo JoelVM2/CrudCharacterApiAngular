@@ -29,25 +29,30 @@
 
       <h2>Editar personaje</h2>
 
-      <input [(ngModel)]="selectedCharacter.name" placeholder="Name">
-      <input [(ngModel)]="selectedCharacter.status" placeholder="Status">
-      <input [(ngModel)]="selectedCharacter.gender" placeholder="Gender">
-      <input [(ngModel)]="selectedCharacter.species" placeholder="Species">
-      <input [(ngModel)]="selectedCharacter.image" placeholder="Image URL">
+      <form [formGroup]="editForm" (ngSubmit)="updateCharacter()">
 
-      <div class="modal-buttons">
-        <button class="btn btn-edit" (click)="updateCharacter()">
-          Guardar
-        </button>
+        <input type="text" placeholder="Name" formControlName="name">
+        <input type="text" placeholder="Status" formControlName="status">
+        <input type="text" placeholder="Gender" formControlName="gender">
+        <input type="text" placeholder="Species" formControlName="species">
+        <input type="text" placeholder="Image URL" formControlName="image">
 
-        <button class="btn btn-delete" (click)="closeModal()">
-          Cancelar
-        </button>
-      </div>
+        <div class="modal-buttons">
+          <button type="submit" class="btn btn-edit">
+            Guardar
+          </button>
+
+          <button type="button" class="btn btn-delete" (click)="closeModal()">
+            Cancelar
+          </button>
+        </div>
+
+      </form>
 
     </div>
   </div>
 }
+
 @if (isDeleteModalOpen) {
   <div class="modal-backdrop">
     <div class="modal">

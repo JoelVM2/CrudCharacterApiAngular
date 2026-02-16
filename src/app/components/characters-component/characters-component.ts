@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CharacterService } from '../../services/character-service';
-import { FormsModule } from '@angular/forms';
+import { FormGroup,FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-characters-component',
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './characters-component.html',
   styleUrl: './characters-component.css',
 })
@@ -15,10 +15,12 @@ import { FormsModule } from '@angular/forms';
  * Permite editar y eliminar personajes.
  */
 export class CharactersComponent {
-  constructor(public characterService: CharacterService, private cdr: ChangeDetectorRef) {}
+  editForm!: FormGroup;
+
   selectedCharacter: any = null;
   isModalOpen = false;
   isDeleteModalOpen = false;
+  constructor(public characterService: CharacterService, private cdr: ChangeDetectorRef, private fb: FormBuilder) { }
 
   /**
    * Inicializa el componente y carga la lista de personajes.
@@ -26,6 +28,14 @@ export class CharactersComponent {
    */
   ngOnInit(): void {
     this.getCharacters();
+
+    this.editForm = this.fb.group({
+      name: ['', Validators.required],
+      status: ['', Validators.required],
+      gender: ['', Validators.required],
+      species: ['', Validators.required],
+      image: ['', Validators.required]
+    });
   }
 
   /**
@@ -64,9 +74,19 @@ export class CharactersComponent {
   }
 
   openEditModal(character: any) {
-    this.selectedCharacter = { ...character };
-    this.isModalOpen = true;
-  }
+  this.selectedCharacter = character;
+
+  this.editForm.patchValue({
+    name: character.name,
+    status: character.status,
+    gender: character.gender,
+    species: character.species,
+    image: character.image
+  });
+
+  this.isModalOpen = true;
+}
+
 
   closeModal() {
     this.isModalOpen = false;
@@ -77,13 +97,21 @@ export class CharactersComponent {
    * @returns void
    */
   updateCharacter() {
+  if (this.editForm.valid) {
+    const updatedCharacter = {
+      ...this.selectedCharacter,
+      ...this.editForm.value
+    };
+
     this.characterService.putCharacter(
       this.selectedCharacter.id,
-      this.selectedCharacter
+      updatedCharacter
     ).subscribe(() => {
       this.getCharacters();
       this.closeModal();
     });
   }
+}
+
 
 }
