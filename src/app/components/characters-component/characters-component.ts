@@ -54,9 +54,11 @@ export class CharactersComponent {
     }); 
   }
 
-  openDeleteModal() {
+  openDeleteModal(character: any) {
+  this.selectedCharacter = character;
   this.isDeleteModalOpen = true;
-  }
+}
+
 
   closeDeleteModal() {
     this.isDeleteModalOpen = false;
